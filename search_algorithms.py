@@ -8,6 +8,13 @@ Common Search Algorithms
 
 
 def binary_search(key, sorted_list):
+
+    """
+
+    Binary Search key in sorted_list and return index if present and None if
+    not present.
+
+    """
     a = sorted_list
     low = 0
     high = len(a) - 1

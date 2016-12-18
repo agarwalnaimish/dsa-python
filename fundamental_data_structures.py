@@ -44,21 +44,25 @@ class ArrayStack(object):
 
     def __init__(self, capacity, auto_resize_capacity=False):
 
-        # _ds is acronym for underlying data structure
-        self._ds = []
         self._capacity = capacity
+
+        # _ds is acronym for underlying data structure
+        self._ds = [None] * self._capacity
+
         self._count = 0
         self._auto_resize_capacity = auto_resize_capacity
 
     def push(self, item):
 
         if self._count < self._capacity:
-            self._ds.append(item)
+            self._ds[self._count] = item
             self._count += 1
         elif self._auto_resize_capacity:
             self.resize(self._capacity * 2)
-            self._ds.append(item)
+            self._ds[self._count] = item
             self._count += 1
+        else:
+            raise BaseException("StackOverflowException")
 
     def pop(self):
 
@@ -72,6 +76,8 @@ class ArrayStack(object):
                     self.resize(self._capacity / 2)
 
             return value
+        else:
+            raise BaseException("StackUnderflowException")
 
     def is_empty(self):
         return self._count == 0
@@ -80,5 +86,7 @@ class ArrayStack(object):
         return self._count
 
     def resize(self, new_capacity):
-        if new_capacity > self._count:
+        if new_capacity >= self._count:
             self._capacity = new_capacity
+        else:
+            raise BaseException("StackItemsLossException")

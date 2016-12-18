@@ -22,22 +22,43 @@ class Bag(object):
         pass
 
 
-class Queue(object):
+class LinkedListQueue(object):
 
     def __init__(self):
-        pass
+        self.first = None
+        self.last = None
+        self._count = 0
 
     def enqueue(self, item):
-        pass
+        if self.is_empty():
+            node = SinglyLinkedNode(item, None)
+            self.first = node
+            self.last = node
+            self._count += 1
+        else:
+            node = SinglyLinkedNode(item, None)
+            self.last.next_node = node
+            self.last = node
+            self._count += 1
 
     def dequeue(self):
-        pass
+        if not self.is_empty():
+            node = self.first
+            value = node.item
+            self.first = node.next_node
+            self._count -= 1
+            del node
+            if self.is_empty():
+                self.last = None
+            return value
+        else:
+            raise Exception("QueueUnderflowException")
 
     def is_empty(self):
-        pass
+        return self._count == 0
 
     def size(self):
-        pass
+        return self._count
 
 
 class ArrayStack(object):
@@ -106,7 +127,7 @@ class LinkedListStack(object):
         self._count = 0
 
     def push(self, item):
-        if self._top is None:
+        if self.is_empty():
             node = SinglyLinkedNode(item, None)
             self._top = node
             self._count += 1

@@ -78,4 +78,5 @@ class FixedCapacityStack(object):
         return self._count
 
     def resize(self, new_capacity):
-        self._capacity = new_capacity
+        if new_capacity > self._count:
+            self._capacity = new_capacity

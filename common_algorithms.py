@@ -7,6 +7,7 @@ Common Algorithms
 
 
 import math
+import fundamental_data_structures as fds
 
 
 def gcd(p, q):
@@ -36,3 +37,29 @@ def is_prime(n):
             return False
 
     return True
+
+
+def evaluate_arithmetic_expression(expression):
+    """
+
+    Evaluate an arithmetic expression using Dijkstra's two stack algorithm.
+
+    Parameters:
+    -----------
+
+    expression: arithmetic expression which can comprise the following:
+        (, ), +, -, *, /, numbers
+
+    all separated by spaces.
+
+    Returns:
+    --------
+
+    Value of expression after evaluation
+
+    """
+
+    tokens = expression.split()
+
+    for token in tokens:
+        pass

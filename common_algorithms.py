@@ -43,6 +43,15 @@ def evaluate_arithmetic_expression(expression):
     """
 
     Evaluate an arithmetic expression using Dijkstra's two stack algorithm.
+    The function assumes that each subexpression is enclosed in parenthesis.
+
+    e.g. ( 1 + ( 2 * ( 3 / 7 ) ) )
+
+    It is also assumed that at least one operator and two operands are present.
+
+    e.g. 1 + 2 (valid)
+
+    e.g. 2 (invalid)
 
     Parameters:
     -----------
@@ -59,6 +68,7 @@ def evaluate_arithmetic_expression(expression):
 
     """
 
+    expression = "( " + expression + " )"
     tokens = expression.split()
     operator_stack = fds.LinkedListStack()
     operand_stack = fds.LinkedListStack()
@@ -73,6 +83,8 @@ def evaluate_arithmetic_expression(expression):
             operator = operator_stack.pop()
             num2 = operand_stack.pop()
             num1 = operand_stack.pop()
+
+            print num1, operator, num2
             if operator == "+":
                 operand = num1 + num2
             elif operator == "-":
@@ -85,3 +97,5 @@ def evaluate_arithmetic_expression(expression):
         else:
             operand = float(token)
             operand_stack.push(operand)
+
+    return operand_stack.pop()

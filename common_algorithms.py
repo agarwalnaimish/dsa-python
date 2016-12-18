@@ -8,8 +8,10 @@ Common Algorithms
 
 import math
 import fundamental_data_structures as fds
+from numba import jit
 
 
+@jit
 def gcd(p, q):
 
     """
@@ -22,6 +24,7 @@ def gcd(p, q):
     return gcd(q, r)
 
 
+@jit
 def is_prime(n):
     """
 

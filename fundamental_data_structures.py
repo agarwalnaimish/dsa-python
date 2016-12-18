@@ -6,9 +6,12 @@ Fundamental Data Structures.
 
 """
 
+from numba import jit
+
 
 class ArrayStack(object):
 
+    @jit
     def __init__(self, capacity, auto_resize_capacity=False):
 
         self._capacity = capacity
@@ -19,6 +22,7 @@ class ArrayStack(object):
         self._count = 0
         self._auto_resize_capacity = auto_resize_capacity
 
+    @jit
     def push(self, item):
 
         if self._count < self._capacity:
@@ -31,6 +35,7 @@ class ArrayStack(object):
         else:
             raise BaseException("StackOverflowException")
 
+    @jit
     def pop(self):
 
         if not self.is_empty():
@@ -46,12 +51,15 @@ class ArrayStack(object):
         else:
             raise BaseException("StackUnderflowException")
 
+    @jit
     def is_empty(self):
         return self._count == 0
 
+    @jit
     def size(self):
         return self._count
 
+    @jit
     def resize(self, new_capacity):
         if new_capacity >= self._count:
             self._capacity = new_capacity
@@ -61,6 +69,7 @@ class ArrayStack(object):
 
 class SinglyLinkedNode(object):
 
+    @jit
     def __init__(self, item, next_node):
         self.item = item
         self.next_node = next_node
@@ -68,10 +77,12 @@ class SinglyLinkedNode(object):
 
 class LinkedListStack(object):
 
+    @jit
     def __init__(self):
         self._top = None
         self._count = 0
 
+    @jit
     def push(self, item):
         if self.is_empty():
             node = SinglyLinkedNode(item, None)
@@ -82,6 +93,7 @@ class LinkedListStack(object):
             self._top = node
             self._count += 1
 
+    @jit
     def pop(self):
         if not self.is_empty():
             top = self._top
@@ -93,19 +105,23 @@ class LinkedListStack(object):
         else:
             raise BaseException("StackUnderflowException")
 
+    @jit
     def size(self):
         return self._count
 
+    @jit
     def is_empty(self):
         return self._count == 0
 
 
 class LinkedListBag(object):
 
+    @jit
     def __init__(self):
         self._top = None
         self._count = 0
 
+    @jit
     def add(self, item):
         if self.is_empty():
             node = SinglyLinkedNode(item, None)
@@ -116,12 +132,15 @@ class LinkedListBag(object):
             self._top = node
             self._count += 1
 
+    @jit
     def size(self):
         return self._count
 
+    @jit
     def is_empty(self):
         return self._count == 0
 
+    @jit
     def iterator(self):
         node = self._top
         while node is not None:
@@ -131,11 +150,13 @@ class LinkedListBag(object):
 
 class LinkedListQueue(object):
 
+    @jit
     def __init__(self):
         self.first = None
         self.last = None
         self._count = 0
 
+    @jit
     def enqueue(self, item):
         if self.is_empty():
             node = SinglyLinkedNode(item, None)
@@ -148,6 +169,7 @@ class LinkedListQueue(object):
             self.last = node
             self._count += 1
 
+    @jit
     def dequeue(self):
         if not self.is_empty():
             node = self.first
@@ -161,8 +183,11 @@ class LinkedListQueue(object):
         else:
             raise Exception("QueueUnderflowException")
 
+    @jit
     def is_empty(self):
         return self._count == 0
+
+
 
     def size(self):
         return self._count

@@ -6,7 +6,10 @@ Common Search Algorithms
 
 """
 
+from numba import jit
 
+
+@jit
 def binary_search(key, sorted_list):
 
     """

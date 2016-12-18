@@ -187,7 +187,6 @@ class LinkedListQueue(object):
     def is_empty(self):
         return self._count == 0
 
-
-
+    @jit
     def size(self):
         return self._count

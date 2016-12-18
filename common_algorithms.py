@@ -50,7 +50,7 @@ def evaluate_arithmetic_expression(expression):
     expression: arithmetic expression which can comprise the following:
         (, ), +, -, *, /, numbers
 
-    all separated by spaces.
+    all separated by whitespace.
 
     Returns:
     --------
@@ -60,6 +60,28 @@ def evaluate_arithmetic_expression(expression):
     """
 
     tokens = expression.split()
+    operator_stack = fds.LinkedListStack()
+    operand_stack = fds.LinkedListStack()
 
     for token in tokens:
-        pass
+        if token == "(":
+            pass
+        elif token in ["+", "-", "*", "/"]:
+            operator = token
+            operator_stack.push(operator)
+        elif token == ")":
+            operator = operator_stack.pop()
+            num2 = operand_stack.pop()
+            num1 = operand_stack.pop()
+            if operator == "+":
+                operand = num1 + num2
+            elif operator == "-":
+                operand = num1 - num2
+            elif operator == "*":
+                operand = num1 * num2
+            elif operator == "/":
+                operand = num1 / num2
+            operand_stack.push(operand)
+        else:
+            operand = float(token)
+            operand_stack.push(operand)

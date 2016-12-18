@@ -90,3 +90,44 @@ class ArrayStack(object):
             self._capacity = new_capacity
         else:
             raise BaseException("StackItemsLossException")
+
+
+class SinglyLinkedNode(object):
+
+    def __init__(self, item, next_node):
+        self.item = item
+        self.next_node = next_node
+
+
+class LinkedListStack(object):
+
+    def __init__(self):
+        self._top = None
+        self._count = 0
+
+    def push(self, item):
+        if self._top is None:
+            node = SinglyLinkedNode(item, None)
+            self._top = node
+            self._count += 1
+        else:
+            node = SinglyLinkedNode(item, self._top)
+            self._top = node
+            self._count += 1
+
+    def pop(self):
+        if not self.is_empty():
+            top = self._top
+            value = top.item
+            self._top = top.next_node
+            del top
+            self._count -= 1
+            return value
+        else:
+            raise BaseException("StackUnderflowException")
+
+    def size(self):
+        return self._count
+
+    def is_empty(self):
+        return self._count == 0

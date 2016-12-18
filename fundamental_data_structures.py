@@ -1,7 +1,7 @@
 """
 Fundamental Data Structures.
 
-@author: agarwalnaimish
+@author: Naimish Agarwal
 """
 
 
@@ -38,7 +38,7 @@ class Queue(object):
         pass
 
 
-class FixedCapacityStack(object):
+class ArrayStack(object):
 
     def __init__(self, capacity, auto_resize_capacity=False):
 

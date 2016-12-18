@@ -7,21 +7,6 @@ Fundamental Data Structures.
 """
 
 
-class Bag(object):
-
-    def __init__(self):
-        pass
-
-    def add(self, item):
-        pass
-
-    def is_Empty(self):
-        pass
-
-    def size(self):
-        pass
-
-
 class LinkedListQueue(object):
 
     def __init__(self):

@@ -7,45 +7,6 @@ Fundamental Data Structures.
 """
 
 
-class LinkedListQueue(object):
-
-    def __init__(self):
-        self.first = None
-        self.last = None
-        self._count = 0
-
-    def enqueue(self, item):
-        if self.is_empty():
-            node = SinglyLinkedNode(item, None)
-            self.first = node
-            self.last = node
-            self._count += 1
-        else:
-            node = SinglyLinkedNode(item, None)
-            self.last.next_node = node
-            self.last = node
-            self._count += 1
-
-    def dequeue(self):
-        if not self.is_empty():
-            node = self.first
-            value = node.item
-            self.first = node.next_node
-            self._count -= 1
-            del node
-            if self.is_empty():
-                self.last = None
-            return value
-        else:
-            raise Exception("QueueUnderflowException")
-
-    def is_empty(self):
-        return self._count == 0
-
-    def size(self):
-        return self._count
-
-
 class ArrayStack(object):
 
     def __init__(self, capacity, auto_resize_capacity=False):
@@ -137,3 +98,71 @@ class LinkedListStack(object):
 
     def is_empty(self):
         return self._count == 0
+
+
+class LinkedListBag(object):
+
+    def __init__(self):
+        self._top = None
+        self._count = 0
+
+    def add(self, item):
+        if self.is_empty():
+            node = SinglyLinkedNode(item, None)
+            self._top = node
+            self._count += 1
+        else:
+            node = SinglyLinkedNode(item, self._top)
+            self._top = node
+            self._count += 1
+
+    def size(self):
+        return self._count
+
+    def is_empty(self):
+        return self._count == 0
+
+    def iterator(self):
+        node = self._top
+        while node is not None:
+            yield node.item
+            node = node.next_node
+
+
+class LinkedListQueue(object):
+
+    def __init__(self):
+        self.first = None
+        self.last = None
+        self._count = 0
+
+    def enqueue(self, item):
+        if self.is_empty():
+            node = SinglyLinkedNode(item, None)
+            self.first = node
+            self.last = node
+            self._count += 1
+        else:
+            node = SinglyLinkedNode(item, None)
+            self.last.next_node = node
+            self.last = node
+            self._count += 1
+
+    def dequeue(self):
+        if not self.is_empty():
+            node = self.first
+            value = node.item
+            self.first = node.next_node
+            self._count -= 1
+            del node
+            if self.is_empty():
+                self.last = None
+            return value
+        else:
+            raise Exception("QueueUnderflowException")
+
+    def is_empty(self):
+        return self._count == 0
+
+    def size(self):
+        return self._count
